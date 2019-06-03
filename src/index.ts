@@ -12,11 +12,7 @@ export function OnChange<T = any>(callback: (value: T, simpleChange?: SimpleChan
         Object.defineProperty(target, key, {
             set: function (value) {
                 // change status of "isFirstChange"
-                if (this[isFirstChangeKey] === undefined) {
-                    this[isFirstChangeKey] = true;
-                } else {
-                    this[isFirstChangeKey] = false;
-                }
+                this[isFirstChangeKey] = this[isFirstChangeKey] === undefined;
                 // No operation if new value is same as old value
                 if (!this[isFirstChangeKey] && this[cachedValueKey] === value) {
                     return;
